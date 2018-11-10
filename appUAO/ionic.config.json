@@ -1,0 +1,7 @@
+{
+  "name": "appUAO",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "ionic-angular"
+}
