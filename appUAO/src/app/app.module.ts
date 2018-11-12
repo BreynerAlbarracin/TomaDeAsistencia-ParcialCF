@@ -9,6 +9,7 @@ import { InicioSesionPage } from '../pages/inicioSesion/inicioSesion';
 import { HorarioPage } from '../pages/horario/horario';
 import { ScannerPage } from '../pages/scanner/scanner';
 
+import { QRScanner } from '@ionic-native/qr-scanner';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -38,6 +39,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
   providers: [
     StatusBar,
     SplashScreen,
+    QRScanner,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
