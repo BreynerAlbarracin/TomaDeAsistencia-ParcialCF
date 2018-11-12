@@ -6,6 +6,7 @@ import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
 import { InicioSesionPage } from '../pages/inicioSesion/inicioSesion';
+import { HorarioPage } from '../pages/horario/horario';
 
 
 import { StatusBar } from '@ionic-native/status-bar';
@@ -16,7 +17,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     MyApp,
     HomePage,
     ListPage,
-    InicioSesionPage
+    InicioSesionPage,
+    HorarioPage
   ],
   imports: [
     BrowserModule,
@@ -27,7 +29,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     MyApp,
     HomePage,
     ListPage,
-    InicioSesionPage
+    InicioSesionPage,
+    HorarioPage
   ],
   providers: [
     StatusBar,

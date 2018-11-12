@@ -1,3 +1,37 @@
 page-inicio-sesion {
-
 }
+
+.iniSesion {
+  left: 0px;
+  background-image: url('https://fastly.4sqi.net/img/general/width960/38345142_O6un4ZO7NnzLY2mlYJMKm-vkbC-Ki1_2Q-qJiaBaJ9E.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+ion-row {
+  align-items: center;
+  text-align: center;
+}
+
+.ipForm {
+  border-radius: 10px !important;
+  padding-left: 10px !important;
+  margin-bottom: 4px;
+  background-color: #f6f6f6;
+  font-size: 0.9em;
+}
+
+.login-logo {
+  flex: 2;
+}
+
+.login-form {
+  flex: 1;
+}
+
+.checkB{
+  background-color:transparent !important;
+  color:white;
+}
+
+
