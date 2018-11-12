@@ -11,7 +11,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 @IonicPage()
 @Component({
   selector: 'page-inicio-sesion',
-  templateUrl: 'inicio-sesion.html',
+  templateUrl: 'inicioSesion.html',
 })
 export class InicioSesionPage {
 
