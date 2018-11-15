@@ -15,12 +15,12 @@
 #include <SPI.h>
 #include <MFRC522.h>
 
-#define RST_PIN         5          // Configurable, segun el arduino
-#define SS_PIN          53         // Configurable, segun el arduino
+#define RST_PIN          9         // Configurable, segun el arduino
+#define SS_PIN          10         // Configurable, segun el arduino
 
-#define ledPinVerde     8          // Led Verde - Llego a tiempo
-#define ledPinAzul      9          // Led Azul - Llego tarde
-#define ledPinRojo      10         // Led rojo - Clase equivocada
+#define ledPinVerde     6          // Led Verde - Llego a tiempo
+#define ledPinAzul      7          // Led Azul - Llego tarde
+#define ledPinRojo      8        // Led rojo - Clase equivocada
 
 MFRC522 mfrc522(SS_PIN, RST_PIN);  // Crea objeto MFRC522
 
