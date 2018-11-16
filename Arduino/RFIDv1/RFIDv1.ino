@@ -208,12 +208,16 @@ void mostrarRespuesta(String res) {
     }
   }
 
-  lcdArriba(nombre, 0);
-  lcdAbajo(estado , 0);
+  lcdArriba(nombre, ((16 - nombre.length())/2));
+  lcdAbajo(estado , ((16 - nombre.length())/2));
   delay(3000);
 }
 
 void lcdArriba(String msj, int p) {
+  if(p < 0){
+    p = 0;
+  }
+
   lcd.setCursor(0, 0);
   lcd.print("                ");
   lcd.setCursor(p, 0);
@@ -221,6 +225,10 @@ void lcdArriba(String msj, int p) {
 }
 
 void lcdAbajo(String msj, int p) {
+  if(p < 0){
+    p = 0;
+  }
+
   lcd.setCursor(0, 1);
   lcd.print("                ");
   lcd.setCursor(p, 1);
