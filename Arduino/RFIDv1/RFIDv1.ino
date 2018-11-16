@@ -17,19 +17,17 @@
 #include <LiquidCrystal_I2C.h>
 #include <Wire.h>
 
-<<<<<<< HEAD
 //WiFi
 const char* ssid = ":v";
 const char* password = "Usaka.red2804";
 const int httpPort = 80;
-=======
+
 #define RST_PIN          9         // Configurable, segun el arduino
 #define SS_PIN          10         // Configurable, segun el arduino
 
 #define ledPinVerde     6          // Led Verde - Llego a tiempo
 #define ledPinAzul      7          // Led Azul - Llego tarde
 #define ledPinRojo      8        // Led rojo - Clase equivocada
->>>>>>> 2a623ff61eb52dacce128be77c68ef1657e98866
 
 //RFID
 #define SDA D4
@@ -72,8 +70,8 @@ void conectarWifi() {
   //Conectamos WiFi
   Serial.print("Conectando a: ");
   Serial.println(ssid);
-  lcdArriba("Conectando a: ", 1);
-  lcdAbajo(ssid, 1);
+  lcdArriba("Conectando a: ");
+  lcdAbajo(ssid);
   delay(1000);
 
   //Cambiamos a modo Cliente y conectamos a la red
@@ -89,8 +87,8 @@ void conectarWifi() {
   Serial.println("WiFi conectado");
   Serial.print("IP: ");
   Serial.println(WiFi.localIP());
-  lcdArriba("Conexion", 4);
-  lcdAbajo("Establecida", 3);
+  lcdArriba("Conexion");
+  lcdAbajo("Establecida");
   delay(500);
 }
 
@@ -149,8 +147,8 @@ void leerRFID() {
 void informarLectura(String tag) {
   Serial.print("Tarjeta Detectada:");
   Serial.println(tag);
-  lcdArriba("TarjetaDetectada", 0);
-  lcdAbajo(tag, 4);
+  lcdArriba("TarjetaDetectada");
+  lcdAbajo(tag);
 
   //Creamos el Host
   HTTPClient http;
@@ -182,8 +180,8 @@ void informarLectura(String tag) {
   if (statusCode == 200) {
     mostrarRespuesta(res);
   }else{
-    lcdArriba("INTENTE DE NUEVO" , 0);
-    lcdAbajo("" , 0);
+    lcdArriba("INTENTE DE NUEVO");
+    lcdAbajo("");
   }
 
   espera = true;
@@ -208,30 +206,22 @@ void mostrarRespuesta(String res) {
     }
   }
 
-  lcdArriba(nombre, ((16 - nombre.length())/2));
-  lcdAbajo(estado , ((16 - nombre.length())/2));
+  lcdArriba(nombre);
+  lcdAbajo(estado);
   delay(3000);
 }
 
-void lcdArriba(String msj, int p) {
-  if(p < 0){
-    p = 0;
-  }
-
+void lcdArriba(String msj) {  
   lcd.setCursor(0, 0);
   lcd.print("                ");
-  lcd.setCursor(p, 0);
+  lcd.setCursor(((16 - msj.length())/2), 0);
   lcd.print(msj);
 }
 
-void lcdAbajo(String msj, int p) {
-  if(p < 0){
-    p = 0;
-  }
-
+void lcdAbajo(String msj) {
   lcd.setCursor(0, 1);
   lcd.print("                ");
-  lcd.setCursor(p, 1);
+  lcd.setCursor(((16 - msj.length())/2), 1);
   lcd.print(msj);
   delay(1000);
 }
@@ -239,8 +229,8 @@ void lcdAbajo(String msj, int p) {
 void loop() {
   if (espera) {
     Serial.println("En espera");
-    lcdArriba("COLOQUE SU", 3);
-    lcdAbajo("CARNET", 5);
+    lcdArriba("COLOQUE SU");
+    lcdAbajo("CARNET");
     espera = false;
   }
 

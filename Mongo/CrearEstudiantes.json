@@ -1,0 +1,69 @@
+use dbuniversidad
+
+db.estudiantes.remove({})
+
+db.estudiantes.insert([
+    {
+        "_id": 1144082856,
+        "nombre": "Breyner",
+        "apellido": "Albarracin",
+        "codigo": 2171726,
+        "carnet": "B227C24C",
+        "clases": [
+            {
+                "nombre": "Computacion Fisica",
+                "salon": 2101,
+                "horainicio": 1650,
+                "horafinal": 1700
+            },
+            {
+                "nombre": "Procesamiento de Señales",
+                "salon": 2304,
+                "horainicio": 900,
+                "horafinal": 1200
+            }
+        ]
+    },
+    {
+        "_id": 1144984325,
+        "nombre": "Daniela",
+        "apellido": "Diaz",
+        "codigo": 2146578,
+        "carnet": "6631F61F",
+        "clases": [
+            {
+                "nombre": "Computacion Fisica",
+                "salon": 2101,
+                "horainicio": 1600,
+                "horafinal": 1700
+            },
+            {
+                "nombre": "Procesamiento de Señales",
+                "salon": 2304,
+                "horainicio": 900,
+                "horafinal": 1200
+            }
+        ]
+    },
+    {
+        "_id": 1143894562,
+        "nombre": "Francisco",
+        "apellido": "Garcia",
+        "codigo": 2104538,
+        "carnet": "EC8720D9",
+        "clases": [
+            {
+                "nombre": "Computacion Fisica",
+                "salon": 1101,
+                "horainicio": 700,
+                "horafinal": 1000
+            },
+            {
+                "nombre": "Procesamiento de Señales",
+                "salon": 2304,
+                "horainicio": 900,
+                "horafinal": 1200
+            }
+        ]
+    }
+])
