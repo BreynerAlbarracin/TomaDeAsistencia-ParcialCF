@@ -17,10 +17,19 @@
 #include <LiquidCrystal_I2C.h>
 #include <Wire.h>
 
+<<<<<<< HEAD
 //WiFi
 const char* ssid = ":v";
 const char* password = "Usaka.red2804";
 const int httpPort = 80;
+=======
+#define RST_PIN          9         // Configurable, segun el arduino
+#define SS_PIN          10         // Configurable, segun el arduino
+
+#define ledPinVerde     6          // Led Verde - Llego a tiempo
+#define ledPinAzul      7          // Led Azul - Llego tarde
+#define ledPinRojo      8        // Led rojo - Clase equivocada
+>>>>>>> 2a623ff61eb52dacce128be77c68ef1657e98866
 
 //RFID
 #define SDA D4

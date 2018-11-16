@@ -6,6 +6,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
 import { InicioSesionPage } from '../pages/inicioSesion/inicioSesion';
+import { HorarioPage } from '../pages/horario/horario';
+import { ScannerPage } from '../pages/scanner/scanner';
 
 @Component({
   templateUrl: 'app.html'
@@ -23,9 +25,10 @@ export class MyApp {
 
     // used for an example of ngFor and navigation
     this.pages = [
+      { icon: '', title: 'LA UAO DE LA SEMANA', component: ListPage},
       { icon: '', title: 'Noticias', component: HomePage},
-      { icon: '', title: 'List', component: ListPage},
       { icon: 'md-exit',  title: 'Iniciar Sesión', component: InicioSesionPage },
+      { icon: '',  title: 'Horario', component: HorarioPage },
     ];
 
   }

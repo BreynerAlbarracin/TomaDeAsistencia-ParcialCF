@@ -1,15 +1,50 @@
-const express = require('express')
+var express = require('express')
+var cors = require('cors')
 
-const app = express()
+var app = express()
+app.use(cors())
 
-dist = ""
+app.get('/:salon/:tag', (req, res) => {
+    var salon = req.params.salon
+    var tag = req.params.tag
 
-app.get('/:data', (req, res) => {
-    dist = req.params.data
-    res.send('Recibido')
-    console.log(dist)
+    console.log('Salon enviado: ' + salon)
+    console.log('Estudiante: ' + tag)
+
+    res.send('Usaka-Tarde')
+})
+
+app.get('/:algo', (req, res) => {
+    console.log(req.params.algo)
+    res.sendFile(__dirname + '/static/index.html')
+})
+
+app.get('/profesores/:profesor', (req, res) => {
+    const objetourl = url.parse(pedido.url)
+    let camino = 'static' + objetourl.pathname
+    if (camino == 'static/')
+        camino = 'static/index.html'
+    fs.stat(camino, error => {
+        if (!error) {
+            fs.readFile(camino, (error, contenido) => {
+                if (error) {
+                    respuesta.writeHead(500, { 'Content-Type': 'text/plain' })
+                    respuesta.write('Error interno')
+                    respuesta.end()
+                } else {
+                    respuesta.writeHead(200, { 'Content-Type': 'text/html' })
+                    respuesta.write(contenido)
+                    respuesta.end()
+                }
+            })
+        } else {
+            respuesta.writeHead(404, { 'Content-Type': 'text/html' })
+            respuesta.write('<!doctype html><html><head></head><body>Recurso inexistente</body></html>')
+            respuesta.end()
+        }
+    })
 })
 
 app.listen(80, () => {
-    console.log("Running")
+    console.log('Servidor web iniciado')
 })

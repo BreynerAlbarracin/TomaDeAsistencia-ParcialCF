@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { InicioSesionPage } from '../inicioSesion/inicioSesion';
+import { HorarioPage } from '../horario/horario';
 
 @Component({
   selector: 'page-home',
@@ -39,5 +40,9 @@ export class HomePage {
  goInicioSesion() {
    this.navCtrl.setRoot(InicioSesionPage);
 
+ }
+
+  goHorario() {
+    this.navCtrl.setRoot(HorarioPage);
   }
 }
