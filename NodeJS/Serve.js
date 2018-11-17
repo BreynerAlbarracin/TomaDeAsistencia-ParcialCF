@@ -3,7 +3,6 @@ var cors = require('cors')
 var mongo = require('mongodb').MongoClient
 var url = "mongodb://localhost:27017/"
 
-
 var app = express()
 app.use(cors())
 
@@ -25,49 +24,89 @@ app.get('/:salon/:tag', (req, res) => {
         var query = { carnet: tag }
         dbo.collection("estudiantes").find(query).toArray(function (err, result) {
             if (err) {
-                res.send(300)
+                db.close()
                 throw err
             }
 
-            console.log('Estudiante registrado: ' + result[0]._id)
+            if (result[0]) {
+                console.log('Estudiante registrado: ' + result[0]._id)
 
-            var date = new Date();
-            var haveClass = false;
 
-            var i = 0
-            while (result[0].clases[i]) {
-                console.log(result[0].clases[i].nombre);
+                var date = new Date()
+                var haveClass = false
 
-                if (result[0].clases[i].salon == salon) {
-                    haveClass = true;
-                    break;
-                }
-                i++
-            }
+                var i = 0
+                while (result[0].clases[i]) {
+                    console.log(result[0].clases[i].nombre)
 
-            var estado = "Salon Erroneo"
-
-            if (haveClass) {
-                var tiempo = (date.getHours() * 100) + date.getMinutes()
-
-                console.log('Hora de clase: ' + result[0].clases[i].horainicio)
-                console.log('Hora de registro: ' + tiempo)
-
-                if (result[0].clases[i].horainicio < tiempo && tiempo < result[0].clases[i].horafinal) {
-                    if ((result[0].clases[i].horainicio + 15) > tiempo) {
-                        estado = 'Registro Listo'
-                    } else {
-                        estado = 'Llegas Tarde'
+                    if (result[0].clases[i].salon == salon) {
+                        haveClass = true
+                        break
                     }
-                } else {
-                    estado = 'Fuera De Tiempo'
+                    i++
                 }
+
+                var estado = "Salon Erroneo"
+
+                if (haveClass) {
+                    var tiempo = (date.getHours() * 100) + date.getMinutes()
+
+                    console.log('Hora de clase: ' + result[0].clases[i].horainicio)
+                    console.log('Hora de registro: ' + tiempo)
+
+                    if (result[0].clases[i].horainicio < tiempo && tiempo < result[0].clases[i].horafinal) {
+                        if ((result[0].clases[i].horainicio + 15) >= tiempo) {
+                            estado = 'Registro Listo'
+
+                            query = { _id: result[0]._id }
+                            values = { $set: { preregistro: 1 } }
+                            dbo.collection("estudiantes").updateOne(query, values, function (err, res) {
+                                if (err) {
+                                    db.close()
+                                    throw err
+                                }
+                                console.log("Preregistro actualizado")
+                                console.log(res)
+                                db.close()
+                            })
+
+                        } else {
+                            estado = 'Llegas Tarde'
+                            db.close()
+                        }
+                    } else {
+                        estado = 'Fuera De Tiempo'
+                        db.close()
+                    }
+                }
+
+                console.log('Estado del estudiante: ' + estado)
+
+                res.send(result[0].nombre + ' ' + result[0].apellido + '-' + estado)
+                //db.close()
+            }else{
+                res.send('Error De-Tarjeta')
+                db.close()
+            }
+        })
+    })
+})
+
+app.get('/restaurarAsistencia', (req, res) => {
+    mongo.connect(url, (err, connection) => {
+        if (err) {
+            throw err
+        }
+
+        var db = connection.db('dbuniversidad')
+        db.collection('estudiantes').update({}, { $set: { preregistro: 0 } }, (err, result) => {
+            if (err) {
+                db.close()
+                throw err
             }
 
-            console.log('Estado del estudiante: ' + estado)
-
-            res.send(result[0].nombre + ' ' + result[0].apellido + '-' + estado)
-            db.close()
+            console.log(result);
+            res.send(result)
         })
     })
 })

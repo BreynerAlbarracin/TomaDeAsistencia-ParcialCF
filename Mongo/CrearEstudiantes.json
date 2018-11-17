@@ -9,12 +9,13 @@ db.estudiantes.insert([
         "apellido": "Albarracin",
         "codigo": 2171726,
         "carnet": "B227C24C",
+        "preregistro" : 0,
         "clases": [
             {
                 "nombre": "Computacion Fisica",
                 "salon": 2101,
-                "horainicio": 1650,
-                "horafinal": 1700
+                "horainicio": 2108,
+                "horafinal": 2300
             },
             {
                 "nombre": "Procesamiento de Señales",
@@ -30,12 +31,13 @@ db.estudiantes.insert([
         "apellido": "Diaz",
         "codigo": 2146578,
         "carnet": "6631F61F",
+        "preregistro" : 0,
         "clases": [
             {
                 "nombre": "Computacion Fisica",
                 "salon": 2101,
-                "horainicio": 1600,
-                "horafinal": 1700
+                "horainicio": 1930,
+                "horafinal": 2100
             },
             {
                 "nombre": "Procesamiento de Señales",
@@ -51,6 +53,7 @@ db.estudiantes.insert([
         "apellido": "Garcia",
         "codigo": 2104538,
         "carnet": "EC8720D9",
+        "preregistro" : 0,
         "clases": [
             {
                 "nombre": "Computacion Fisica",
