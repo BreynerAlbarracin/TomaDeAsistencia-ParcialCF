@@ -1,10 +1,97 @@
 var express = require('express')
 var cors = require('cors')
 var mongo = require('mongodb').MongoClient
+var qr = require('qr-image')
 var url = "mongodb://localhost:27017/"
+var lastReq = "";
 
 var app = express()
 app.use(cors())
+
+app.get('/test', (req, res) => {
+    console.log(req.params.algo)
+    res.sendFile(__dirname + '/public/index.html')
+})
+
+app.get('/restaurarAsistencia', (req, res) => {
+    mongo.connect(url, { useNewUrlParser: true }, (err, connection) => {
+        if (err) {
+            throw err
+        }
+
+        var db = connection.db('dbuniversidad')
+
+        db.collection('estudiantes').updateMany({}, { $set: { 'clases.$[].preregistro': 0 } }, (err, result) => {
+            console.log('Asistencia restaurada')
+        })
+
+        db.collection('estudiantes').updateMany({}, { $set: { 'clases.$[].codigo': '' } }, () => {
+            console.log('Codigos restaurados')
+        })
+
+        res.send('Asistencia restaurada')
+    })
+})
+
+app.get('/salon/:salon', (req, res) => {
+    var salon = req.params.salon
+
+    if (isNaN(salon)) {
+        console.log('Recurso solicitado: ' + salon)
+        res.sendFile(lastReq + salon)
+        return
+    }
+
+    console.log('Peticion desde salon: ' + salon)
+    var date = new Date()
+    var time = (date.getHours() * 100) + date.getMinutes()
+    console.log('Hora de peticion: ' + time)
+    var nombreClase = ""
+
+    mongo.connect(url, { useNewUrlParser: true }, (err, connection) => {
+        if (err) {
+            throw err
+        }
+
+        var db = connection.db('dbuniversidad')
+
+        db.collection('estudiantes').find({}).toArray((err, results) => {
+            if (err) {
+                throw err
+            }
+
+            results.forEach((result) => {
+                result.clases.forEach((clase) => {
+                    if (salon == clase.salon) {
+                        if (clase.horainicio <= time && time <= clase.horafinal) {
+                            nombreClase = clase.nombre
+                            console.log('Clase determinada: ' + nombreClase + ', ' + clase.id)
+
+                            var qrText = nombreClase + '-' + date.getSeconds()
+                            let camino = __dirname + '/public/' + salon + '/'
+                            lastReq = camino
+
+                            console.log('Generando nuevo QR: ' + qrText)
+
+                            var qr_svg = qr.image(qrText, { type: 'png' });
+                            qr_svg.pipe(require('fs').createWriteStream(camino + 'qr_image.png'));
+                            var svg_string = qr.imageSync(qrText, { type: 'png' });
+
+                            db.collection('estudiantes').updateMany({}, { $set: { 'clases.$[elemt].codigo': qrText } }, { arrayFilters: [{ 'elemt.id': clase.id }] }, () => {
+                                console.log('Enviado QR desde: ' + camino)
+                                res.sendFile(camino + 'qr.html')
+                            })
+                        }
+                    }
+                })
+            })
+
+            if (nombreClase == "") {
+                res.sendFile(__dirname + '/public/fueraTiempo.html')
+            }
+        })
+    })
+})
 
 app.get('/:salon/:tag', (req, res) => {
     console.log('--------------------REGISTRO NUEVO--------------------')
@@ -15,7 +102,7 @@ app.get('/:salon/:tag', (req, res) => {
     console.log('Salon Consultado: ' + salon)
     console.log('Estudiante: ' + tag)
 
-    mongo.connect(url, function (err, db) {
+    mongo.connect(url, { useNewUrlParser: true }, (err, db) => {
         if (err) {
             res.send(300)
             throw err
@@ -30,7 +117,6 @@ app.get('/:salon/:tag', (req, res) => {
 
             if (result[0]) {
                 console.log('Estudiante registrado: ' + result[0]._id)
-
 
                 var date = new Date()
                 var haveClass = false
@@ -54,22 +140,21 @@ app.get('/:salon/:tag', (req, res) => {
                     console.log('Hora de clase: ' + result[0].clases[i].horainicio)
                     console.log('Hora de registro: ' + tiempo)
 
-                    if (result[0].clases[i].horainicio < tiempo && tiempo < result[0].clases[i].horafinal) {
+                    if (result[0].clases[i].horainicio <= tiempo && tiempo <= result[0].clases[i].horafinal) {
                         if ((result[0].clases[i].horainicio + 15) >= tiempo) {
                             estado = 'Registro Listo'
 
-                            query = { _id: result[0]._id }
-                            values = { $set: { preregistro: 1 } }
+                            query = { _id: result[0]._id, "clases.salon": result[0].clases[i].salon }
+                            values = { $set: { "clases.$.preregistro": 1 } }
                             dbo.collection("estudiantes").updateOne(query, values, function (err, res) {
                                 if (err) {
                                     db.close()
                                     throw err
+                                } else {
+                                    db.close()
+                                    console.log("Preregistro actualizado")
                                 }
-                                console.log("Preregistro actualizado")
-                                console.log(res)
-                                db.close()
                             })
-
                         } else {
                             estado = 'Llegas Tarde'
                             db.close()
@@ -84,7 +169,7 @@ app.get('/:salon/:tag', (req, res) => {
 
                 res.send(result[0].nombre + ' ' + result[0].apellido + '-' + estado)
                 //db.close()
-            }else{
+            } else {
                 res.send('Error De-Tarjeta')
                 db.close()
             }
@@ -92,54 +177,8 @@ app.get('/:salon/:tag', (req, res) => {
     })
 })
 
-app.get('/restaurarAsistencia', (req, res) => {
-    mongo.connect(url, (err, connection) => {
-        if (err) {
-            throw err
-        }
-
-        var db = connection.db('dbuniversidad')
-        db.collection('estudiantes').update({}, { $set: { preregistro: 0 } }, (err, result) => {
-            if (err) {
-                db.close()
-                throw err
-            }
-
-            console.log(result);
-            res.send(result)
-        })
-    })
-})
-
-app.get('/:algo', (req, res) => {
-    console.log(req.params.algo)
-    res.sendFile(__dirname + '/static/index.html')
-})
-
-app.get('/profesores/:profesor', (req, res) => {
-    const objetourl = url.parse(pedido.url)
-    let camino = 'static' + objetourl.pathname
-    if (camino == 'static/')
-        camino = 'static/index.html'
-    fs.stat(camino, error => {
-        if (!error) {
-            fs.readFile(camino, (error, contenido) => {
-                if (error) {
-                    respuesta.writeHead(500, { 'Content-Type': 'text/plain' })
-                    respuesta.write('Error interno')
-                    respuesta.end()
-                } else {
-                    respuesta.writeHead(200, { 'Content-Type': 'text/html' })
-                    respuesta.write(contenido)
-                    respuesta.end()
-                }
-            })
-        } else {
-            respuesta.writeHead(404, { 'Content-Type': 'text/html' })
-            respuesta.write('<!doctype html><html><head></head><body>Recurso inexistente</body></html>')
-            respuesta.end()
-        }
-    })
+app.get('/:arch', (req, res) => {
+    res.sendFile(lastReq + req.params.arch)
 })
 
 app.listen(80, () => {

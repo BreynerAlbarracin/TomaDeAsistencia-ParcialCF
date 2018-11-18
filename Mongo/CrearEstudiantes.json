@@ -9,17 +9,24 @@ db.estudiantes.insert([
         "apellido": "Albarracin",
         "codigo": 2171726,
         "carnet": "B227C24C",
-        "preregistro" : 0,
         "clases": [
             {
+                "id" : 534690,
                 "nombre": "Computacion Fisica",
                 "salon": 2101,
-                "horainicio": 2108,
+                "preregistro": 0,
+                "registro": 0,
+                "codigo": "",
+                "horainicio": 2255,
                 "horafinal": 2300
             },
             {
-                "nombre": "Procesamiento de Señales",
+                "id" : 535090,
+                "nombre": "Taller De Imagen y Video",
                 "salon": 2304,
+                "preregistro": 0,
+                "registro": 0,
+                "codigo": "",
                 "horainicio": 900,
                 "horafinal": 1200
             }
@@ -31,17 +38,24 @@ db.estudiantes.insert([
         "apellido": "Diaz",
         "codigo": 2146578,
         "carnet": "6631F61F",
-        "preregistro" : 0,
         "clases": [
             {
+                "id" : 534690,
                 "nombre": "Computacion Fisica",
                 "salon": 2101,
-                "horainicio": 1930,
-                "horafinal": 2100
+                "preregistro": 0,
+                "registro": 0,
+                "codigo": "",
+                "horainicio": 127,
+                "horafinal": 900
             },
             {
+                "id" : 534590,
                 "nombre": "Procesamiento de Señales",
                 "salon": 2304,
+                "preregistro": 0,
+                "registro": 0,
+                "codigo": "",
                 "horainicio": 900,
                 "horafinal": 1200
             }
@@ -53,19 +67,16 @@ db.estudiantes.insert([
         "apellido": "Garcia",
         "codigo": 2104538,
         "carnet": "EC8720D9",
-        "preregistro" : 0,
         "clases": [
             {
+                "id" : 536777,
                 "nombre": "Computacion Fisica",
                 "salon": 1101,
+                "preregistro": 0,
+                "registro": 0,
+                "codigo": "",
                 "horainicio": 700,
                 "horafinal": 1000
-            },
-            {
-                "nombre": "Procesamiento de Señales",
-                "salon": 2304,
-                "horainicio": 900,
-                "horafinal": 1200
             }
         ]
     }
