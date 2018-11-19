@@ -93,6 +93,36 @@ app.get('/salon/:salon', (req, res) => {
     })
 })
 
+app.get('/app/login/:user/:pass', (req, res) => {
+    var userR = req.params.user
+    var passR = req.params.pass
+
+    console.log('Usuario detectado: ' + userR)
+    console.log('Contraseña determinada: ' + passR)
+
+    mongo.connect(url, { useNewUrlParser: true }, (err, connection) => {
+        if (err) {
+            throw err
+        }
+
+        db = connection.db('dbuniversidad')
+
+        var user = db.collection('estudiantes').findOne({ user: userR, pass: passR }, (err, result) => {
+            if(err){
+                throw err
+            }
+            
+            console.log(result)
+        })
+    })
+})
+
+app.get('/app/:idUser', (req, res) => {
+    var idUser = req.params.idUser
+
+
+})
+
 app.get('/:salon/:tag', (req, res) => {
     console.log('--------------------REGISTRO NUEVO--------------------')
 
@@ -175,10 +205,6 @@ app.get('/:salon/:tag', (req, res) => {
             }
         })
     })
-})
-
-app.get('/:arch', (req, res) => {
-    res.sendFile(lastReq + req.params.arch)
 })
 
 app.listen(80, () => {

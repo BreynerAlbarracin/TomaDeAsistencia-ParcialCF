@@ -5,23 +5,25 @@ db.estudiantes.remove({})
 db.estudiantes.insert([
     {
         "_id": 1144082856,
+        "user": "breyner.albarracin",
+        "pass": "2171726",
         "nombre": "Breyner",
         "apellido": "Albarracin",
         "codigo": 2171726,
         "carnet": "B227C24C",
         "clases": [
             {
-                "id" : 534690,
+                "id": 534690,
                 "nombre": "Computacion Fisica",
                 "salon": 2101,
                 "preregistro": 0,
                 "registro": 0,
                 "codigo": "",
-                "horainicio": 2255,
-                "horafinal": 2300
+                "horainicio": 1400,
+                "horafinal": 1600
             },
             {
-                "id" : 535090,
+                "id": 535090,
                 "nombre": "Taller De Imagen y Video",
                 "salon": 2304,
                 "preregistro": 0,
@@ -34,23 +36,25 @@ db.estudiantes.insert([
     },
     {
         "_id": 1144984325,
+        "user": "daniela.diaz",
+        "pass": "1234",
         "nombre": "Daniela",
         "apellido": "Diaz",
         "codigo": 2146578,
         "carnet": "6631F61F",
         "clases": [
             {
-                "id" : 534690,
+                "id": 534690,
                 "nombre": "Computacion Fisica",
                 "salon": 2101,
                 "preregistro": 0,
                 "registro": 0,
                 "codigo": "",
-                "horainicio": 127,
-                "horafinal": 900
+                "horainicio": 1400,
+                "horafinal": 1600
             },
             {
-                "id" : 534590,
+                "id": 534590,
                 "nombre": "Procesamiento de Señales",
                 "salon": 2304,
                 "preregistro": 0,
@@ -63,21 +67,25 @@ db.estudiantes.insert([
     },
     {
         "_id": 1143894562,
+        "user": "francisco.garcia",
+        "pass": "12345",
         "nombre": "Francisco",
         "apellido": "Garcia",
         "codigo": 2104538,
         "carnet": "EC8720D9",
         "clases": [
             {
-                "id" : 536777,
+                "id": 536777,
                 "nombre": "Computacion Fisica",
                 "salon": 1101,
                 "preregistro": 0,
                 "registro": 0,
                 "codigo": "",
-                "horainicio": 700,
-                "horafinal": 1000
+                "horainicio": 1400,
+                "horafinal": 1600
             }
         ]
     }
 ])
+
+db.estudiantes.find().pretty()
