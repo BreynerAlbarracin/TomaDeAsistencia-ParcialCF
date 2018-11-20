@@ -8,11 +8,9 @@ import { ListPage } from '../pages/list/list';
 import { InicioSesionPage } from '../pages/inicioSesion/inicioSesion';
 import { HorarioPage } from '../pages/horario/horario';
 import { ScannerPage } from '../pages/scanner/scanner';
-
-import { QRScanner } from '@ionic-native/qr-scanner';
-
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { HTTP } from '@ionic-native/http';
 
 @NgModule({
   declarations: [
@@ -39,8 +37,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
   providers: [
     StatusBar,
     SplashScreen,
-    QRScanner,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    { provide: ErrorHandler, useClass: IonicErrorHandler },
+    HTTP
   ]
 })
-export class AppModule {}
+export class AppModule { }

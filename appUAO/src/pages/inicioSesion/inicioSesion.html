@@ -1,13 +1,14 @@
 <ion-content padding class="iniSesion">
 
-  <br/>
-  <br/>
-  <br/>
-  <br/>
-  <br/>
-  <br/>
-  <ion-row  class="login-logo">
-    <ion-col ><img src="http://masoportunidades.org/wp-content/uploads/2017/05/logo-universidad-autonoma-de-occidente.png" width="150px"/></ion-col>
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <ion-row class="login-logo">
+    <ion-col><img src="http://masoportunidades.org/wp-content/uploads/2017/05/logo-universidad-autonoma-de-occidente.png"
+        width="150px" /></ion-col>
   </ion-row>
 
   <ion-row class="login-form">
@@ -15,27 +16,31 @@
       <ion-list inset>
 
         <ion-item class="ipForm">
-          <ion-label><ion-icon name="person"></ion-icon></ion-label>
+          <ion-label>
+            <ion-icon name="person"></ion-icon>
+          </ion-label>
           <ion-input [(ngModel)]="username" placeholder="Usuario" type="text"></ion-input>
         </ion-item>
 
         <ion-item class="ipForm">
-          <ion-label><ion-icon name="lock"></ion-icon></ion-label>
+          <ion-label>
+            <ion-icon name="lock"></ion-icon>
+          </ion-label>
           <ion-input [(ngModel)]="password" placeholder="Contraseña" type="password"></ion-input>
         </ion-item>
 
       </ion-list>
 
       <ion-item class="checkB">
-  
-          <ion-checkbox item-left id="acept" color="dark" outline (ionChange)="disbleBt()"></ion-checkbox>
-          <ion-label style="text-align:center">Acepto <br /> Términos y condiciones</ion-label>
+
+        <ion-checkbox item-left id="acept" color="dark" outline (ionChange)="disbleBt()"></ion-checkbox>
+        <ion-label style="text-align:center">Acepto <br /> Términos y condiciones</ion-label>
 
       </ion-item>
-    
-      <br/>
-      <button ion-button id="btLogin" color="danger" (click)="login()" >Ingresar</button>
-      <br/>
+
+      <br />
+      <button ion-button id="btLogin" color="danger" (click)="login()">Ingresar</button>
+      <br />
       <a href="#" class="checkB">¿Olvidó su contraseña?</a>
 
     </ion-col>

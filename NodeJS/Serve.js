@@ -87,6 +87,7 @@ app.get('/salon/:salon', (req, res) => {
             })
 
             if (nombreClase == "") {
+                lastReq = __dirname + '/public/';
                 res.sendFile(__dirname + '/public/fueraTiempo.html')
             }
         })
@@ -108,11 +109,17 @@ app.get('/app/login/:user/:pass', (req, res) => {
         db = connection.db('dbuniversidad')
 
         var user = db.collection('estudiantes').findOne({ user: userR, pass: passR }, (err, result) => {
-            if(err){
+            if (err) {
                 throw err
             }
-            
+
             console.log(result)
+
+            if (result == null) {
+                res.send('0')
+            } else {
+                res.send(result._id + '')
+            }
         })
     })
 })
