@@ -124,10 +124,24 @@ app.get('/app/login/:user/:pass', (req, res) => {
     })
 })
 
-app.get('/app/:idUser', (req, res) => {
+app.get('/app/registro/:idUser/:qr', (req, res) => {
     var idUser = req.params.idUser
+    var qr = req.params.qr
 
+    console.log('Usuario para registro: ' + idUser)
+    console.log('lectura del qr: ' + qr)
 
+    mongo.connect(url, { useNewUrlParser: true }, (err, connection) => {
+        db = connection.db('dbuniversidad')
+        db.collection('estudiantes').updateOne({ _id: idUser }, { $set: { "clases.$[elem].registro": 1 } }, { arrayFilters: [{ "elem.preregistro": 1, "elem.codigo": qr }] }, (err, result) => {
+            if (err) {
+                throw err;
+            } else {
+                console.log(result.result)
+                res.send(result.result.nModified + '')
+            }
+        })
+    })
 })
 
 app.get('/:salon/:tag', (req, res) => {

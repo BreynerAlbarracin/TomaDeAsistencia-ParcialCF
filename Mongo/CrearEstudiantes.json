@@ -4,26 +4,26 @@ db.estudiantes.remove({})
 
 db.estudiantes.insert([
     {
-        "_id": 1144082856,
+        "_id": "1144082856",
         "user": "breyner.albarracin",
         "pass": "2171726",
         "nombre": "Breyner",
         "apellido": "Albarracin",
-        "codigo": 2171726,
+        "codigo": "2171726",
         "carnet": "B227C24C",
         "clases": [
             {
-                "id": 534690,
+                "id": "534690",
                 "nombre": "Computacion Fisica",
                 "salon": 2101,
                 "preregistro": 0,
                 "registro": 0,
-                "codigo": "",
-                "horainicio": 1400,
-                "horafinal": 1600
+                "codigo": "Computacion Fisica-14",
+                "horainicio": 2133,
+                "horafinal": 2200
             },
             {
-                "id": 535090,
+                "id": "535090",
                 "nombre": "Taller De Imagen y Video",
                 "salon": 2304,
                 "preregistro": 0,
@@ -35,26 +35,26 @@ db.estudiantes.insert([
         ]
     },
     {
-        "_id": 1144984325,
+        "_id": "1144984325",
         "user": "daniela.diaz",
         "pass": "1234",
         "nombre": "Daniela",
         "apellido": "Diaz",
-        "codigo": 2146578,
+        "codigo": "2146578",
         "carnet": "6631F61F",
         "clases": [
             {
-                "id": 534690,
+                "id": "534690",
                 "nombre": "Computacion Fisica",
                 "salon": 2101,
                 "preregistro": 0,
                 "registro": 0,
                 "codigo": "",
-                "horainicio": 1400,
-                "horafinal": 1600
+                "horainicio": 2100,
+                "horafinal": 2200
             },
             {
-                "id": 534590,
+                "id": "534590",
                 "nombre": "Procesamiento de Señales",
                 "salon": 2304,
                 "preregistro": 0,

@@ -7,10 +7,10 @@ import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
 import { InicioSesionPage } from '../pages/inicioSesion/inicioSesion';
 import { HorarioPage } from '../pages/horario/horario';
-import { ScannerPage } from '../pages/scanner/scanner';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { HTTP } from '@ionic-native/http';
+import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 
 @NgModule({
   declarations: [
@@ -18,8 +18,7 @@ import { HTTP } from '@ionic-native/http';
     HomePage,
     ListPage,
     InicioSesionPage,
-    HorarioPage,
-    ScannerPage
+    HorarioPage
   ],
   imports: [
     BrowserModule,
@@ -31,14 +30,14 @@ import { HTTP } from '@ionic-native/http';
     HomePage,
     ListPage,
     InicioSesionPage,
-    HorarioPage,
-    ScannerPage
+    HorarioPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
-    HTTP
+    HTTP,
+    BarcodeScanner
   ]
 })
 export class AppModule { }
