@@ -22,7 +22,7 @@ export class HorarioPage {
     let idUser = localStorage.getItem('idUser')
     if (idUser != null) {
       this.barcodeScanner.scan().then(barcodeData => {
-        let url = 'http://192.168.0.11/app/registro/' + idUser + '/' + barcodeData.text
+        let url = 'http://192.168.43.217/app/registro/' + idUser + '/' + barcodeData.text
 
         console.log(url)
 

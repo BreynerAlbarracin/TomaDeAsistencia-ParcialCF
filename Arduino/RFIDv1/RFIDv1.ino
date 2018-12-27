@@ -18,8 +18,8 @@
 #include <Wire.h>
 
 //WiFi
-const char* ssid = ":v";
-const char* password = "Usaka.red2804";
+const char* ssid = "Usaka-Router";
+const char* password = "Usaka.sp2804";
 const int httpPort = 80;
 
 #define RST_PIN          9         // Configurable, segun el arduino
@@ -152,7 +152,7 @@ void informarLectura(String tag) {
 
   //Creamos el Host
   HTTPClient http;
-  String host = "http://192.168.0.11/2101/";
+  String host = "http://192.168.43.217/2101/";
   host.concat(tag);
 
   Serial.print("Solicitando: ");

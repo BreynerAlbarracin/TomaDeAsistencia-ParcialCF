@@ -36,7 +36,7 @@ export class InicioSesionPage {
     let username = this.username
     let password = this.password
 
-    let url = 'http://192.168.0.11/app/login/' + username + '/' + password
+    let url = 'http://192.168.43.217/app/login/' + username + '/' + password
 
     console.log(url)
 

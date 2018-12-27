@@ -19,18 +19,8 @@ db.estudiantes.insert([
                 "preregistro": 0,
                 "registro": 0,
                 "codigo": "Computacion Fisica-14",
-                "horainicio": 2133,
+                "horainicio": 1424,
                 "horafinal": 2200
-            },
-            {
-                "id": "535090",
-                "nombre": "Taller De Imagen y Video",
-                "salon": 2304,
-                "preregistro": 0,
-                "registro": 0,
-                "codigo": "",
-                "horainicio": 900,
-                "horafinal": 1200
             }
         ]
     },
@@ -50,18 +40,8 @@ db.estudiantes.insert([
                 "preregistro": 0,
                 "registro": 0,
                 "codigo": "",
-                "horainicio": 2100,
+                "horainicio": 1415,
                 "horafinal": 2200
-            },
-            {
-                "id": "534590",
-                "nombre": "Procesamiento de Señales",
-                "salon": 2304,
-                "preregistro": 0,
-                "registro": 0,
-                "codigo": "",
-                "horainicio": 900,
-                "horafinal": 1200
             }
         ]
     },
@@ -81,8 +61,8 @@ db.estudiantes.insert([
                 "preregistro": 0,
                 "registro": 0,
                 "codigo": "",
-                "horainicio": 1400,
-                "horafinal": 1600
+                "horainicio": 900,
+                "horafinal": 1000
             }
         ]
     }
